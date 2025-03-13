@@ -1,11 +1,19 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
+// Middleware
+app.use(express.json());
+
+// Routes
 app.get("/", (req, res) => {
-    res.send("Hello from Express on Render!");
+    res.send("Welcome to the Home Page!");
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+app.get("/about", (req, res) => {
+    res.send("This is the About Page.");
+});
+
+app.post("/contact", (req, res) => {
+    res.send(`Message received: ${req.body.message}`);
 });
