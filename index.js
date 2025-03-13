@@ -17,3 +17,6 @@ app.get("/about", (req, res) => {
 app.post("/contact", (req, res) => {
     res.send(`Message received: ${req.body.message}`);
 });
+app.listen(8000,()=>{
+   console.log("server start")
+})
