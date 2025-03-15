@@ -1,22 +1,31 @@
+
 const express = require("express");
+const bodyParser = require("body-parser");
+
 const app = express();
-const port= 3000;
+const PORT = 3000;
 
-// Middleware
-app.use(express.json());
+// Middleware to parse JSON
+app.use(bodyParser.json());
 
-// Routes
-app.get("/", (req, res) => {
-    res.send("Welcome to the Home Page!");
+let dataStore = []; // Temporary in-memory storage
+
+// GET route
+app.get("/data", (req, res) => {
+  res.json({ success: true, data: dataStore });
 });
 
-app.get("/about", (req, res) => {
-    res.send("This is the About Page.");
+// POST route
+app.post("/data", (req, res) => {
+  const newData = req.body;
+  if (!newData || Object.keys(newData).length === 0) {
+    return res.status(400).json({ success: false, message: "Invalid data" });
+  }
+  dataStore.push(newData);
+  res.status(201).json({ success: true, message: "Data added", data: newData });
 });
 
-app.post("/contact", (req, res) => {
-    res.send(`Message received: ${req.body.message}`);
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
-app.listen(8000,()=>{
-   console.log("server start")
-})
