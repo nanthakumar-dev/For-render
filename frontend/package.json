@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy":"https://ecommerce123-yixk.onrender.com/api/v1/product"
+  "proxy":"https://ecommerce123-yixk.onrender.com"
   "scripts": {
     "dev": "vite",
     "build": "vite build",
